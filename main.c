@@ -109,9 +109,9 @@ int main(int argc, char* argv[]) {
 
         }
         for(l = 0; l < width + 2; l++) {
-            setBackground("red");
+            setForeground("red");
             printf("*");
-            setBackground("reset");
+            setForeground("reset");
             
         }
 

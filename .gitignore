@@ -2,3 +2,5 @@ color.o
 main.o
 dungeon
 dungeon
+terminal.o
+dungeon
