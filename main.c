@@ -20,11 +20,10 @@ int main(void) {
     if(f == NULL) {
         perror("Error while opening map.txt\n");
     } else {
-
-        if(fscanf(f, "%d%d", &height, &width) != 2)
-        /* need to figure out why*/
+        
+        if(fscanf(f, "%d%d", &height, &width) != 2) /* if it is not two values, which corresponds to height and width, exit the program*/
             exit(1);
-        if(height < 1 || height > ARRHEIGHT || width < 1 || width > ARRWIDTH)
+        if(height < 1 || height > ARRHEIGHT || width < 1 || width > ARRWIDTH) /* if height and/or width are smaller than 1 OR bigger than defined array (100*100), exit the program*/
             exit(1);
 
 
@@ -34,7 +33,7 @@ int main(void) {
                     exit(1);
             }
         }
-
+        
         if(ferror(f)) {
             perror("Error reading from map.txt\n");
         }
@@ -54,8 +53,4 @@ int main(void) {
 
 
     return 0;
-}
-
-void fileRead(void) {
-
 }
