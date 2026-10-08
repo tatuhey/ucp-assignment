@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "color.h"
+#include "terminal.h"
 
 #define ARRWIDTH 100
 #define ARRHEIGHT 100
@@ -108,9 +109,9 @@ int main(int argc, char* argv[]) {
 
         }
         for(l = 0; l < width + 2; l++) {
-            setForeground("red");
+            setBackground("red");
             printf("*");
-            setForeground("reset");
+            setBackground("reset");
             
         }
 
