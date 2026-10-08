@@ -6,6 +6,8 @@
 #define ARRWIDTH 100
 #define ARRHEIGHT 100
 
+void display(int hgt, int wdt, int mapArray[ARRHEIGHT][ARRWIDTH]);
+
 int main(int argc, char* argv[]) {
     /*
     2D ARRAY CREATION BELOW. NEED TO GRAB THE ARRAY SIZE FROM FILE READING
@@ -14,7 +16,6 @@ int main(int argc, char* argv[]) {
     int height, width, i, j;
     int valid = 0;
     int status = 0;
-    
     /*
     FILE READING BELOW
     */
@@ -53,73 +54,142 @@ int main(int argc, char* argv[]) {
         fclose(f);
     }
 
-    int k, l;
-    char t;
+    if(status == 1) {
+        display(height, width, mapArr);
+    }
+
+    
+    // int k, l;
+    // char t;
     /*
     display array atm
     */
-    if(status == 1) {
-        for(k = 0; k < width + 2; k++){
-            setForeground("red");
-            printf("*");
-            setForeground("reset");
-        }
-        printf("\n");
+    // if(status == 1) {
+    //     for(k = 0; k < width + 2; k++){
+    //         setForeground("red");
+    //         printf("*");
+    //         setForeground("reset");
+    //     }
+    //     printf("\n");
 
-        for(i = 0; i < height; i++) {
-            setForeground("red");
-            printf("*");
-            setForeground("reset");
+    //     for(i = 0; i < height; i++) {
+    //         setForeground("red");
+    //         printf("*");
+    //         setForeground("reset");
 
-            for(j = 0; j < width; j++) {
+    //         for(j = 0; j < width; j++) {
 
-                if(mapArr[i][j] == 0) {
-                    printf(" ");
-                }
-                else if (mapArr[i][j] == 1){
-                    setBackground("white");
-                    printf(" ");
-                    setBackground("reset");
-                }
-                else if (mapArr[i][j] == 2) {
-                    printf("H");
-                }
-                else if (mapArr[i][j] == 3) {
-                    setBackground("red");
-                    printf(" ");
-                    setBackground("reset");
-                }
-                else if (mapArr[i][j] == 4) {
-                    setBackground("blue");
-                    printf("P");
-                    setBackground("reset");
-                }
-                else if (mapArr[i][j] == 5)
-                    printf("G");
-                else
-                    printf("?");
-                /*
-                printf("%d", mapArr[i][j]);
-                */
-            }
-            setForeground("red");
-            printf("*");
-            setForeground("reset");
-            printf("\n");
+    //             if(mapArr[i][j] == 0) {
+    //                 printf(" ");
+    //             }
+    //             else if (mapArr[i][j] == 1){
+    //                 setBackground("white");
+    //                 printf(" ");
+    //                 setBackground("reset");
+    //             }
+    //             else if (mapArr[i][j] == 2) {
+    //                 printf("H");
+    //             }
+    //             else if (mapArr[i][j] == 3) {
+    //                 setBackground("red");
+    //                 printf(" ");
+    //                 setBackground("reset");
+    //             }
+    //             else if (mapArr[i][j] == 4) {
+    //                 setBackground("blue");
+    //                 printf("P");
+    //                 setBackground("reset");
+    //             }
+    //             else if (mapArr[i][j] == 5)
+    //                 printf("G");
+    //             else
+    //                 printf("?");
+    //             /*
+    //             printf("%d", mapArr[i][j]);
+    //             */
+    //         }
+    //         setForeground("red");
+    //         printf("*");
+    //         setForeground("reset");
+    //         printf("\n");
 
-        }
-        for(l = 0; l < width + 2; l++) {
-            setForeground("red");
-            printf("*");
-            setForeground("reset");
+    //     }
+    //     for(l = 0; l < width + 2; l++) {
+    //         setForeground("red");
+    //         printf("*");
+    //         setForeground("reset");
             
-        }
+    //     }
 
-        printf("\n");
+    //     printf("\n");
        
-    }
+    // }
 
 
 
     return 0;
+}
+
+void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
+    int i, j, k, l;
+    char t;
+
+    for(k = 0; k < wdt + 2; k++){
+        setForeground("red");
+        printf("*");
+        setForeground("reset");
+    }
+    printf("\n");
+
+    for(i = 0; i < hgt; i++) {
+        setForeground("red");
+        printf("*");
+        setForeground("reset");
+
+        for(j = 0; j < wdt; j++) {
+
+            if(arr[i][j] == 0) {
+                printf(" ");
+            }
+            else if (arr[i][j] == 1){
+                setBackground("white");
+                printf(" ");
+                setBackground("reset");
+            }
+            else if (arr[i][j] == 2) {
+                printf("H");
+            }
+            else if (arr[i][j] == 3) {
+                setBackground("red");
+                printf(" ");
+                setBackground("reset");
+            }
+            else if (arr[i][j] == 4) {
+                setBackground("blue");
+                printf("P");
+                setBackground("reset");
+            }
+            else if (arr[i][j] == 5)
+                printf("G");
+            else
+                printf("?");
+            /*
+            printf("%d", mapArr[i][j]);
+            */
+        }
+        setForeground("red");
+        printf("*");
+        setForeground("reset");
+        printf("\n");
+
+    }
+    for(l = 0; l < wdt + 2; l++) {
+        setForeground("red");
+        printf("*");
+        setForeground("reset");
+        
+    }
+
+    printf("\n");
+       
 }
