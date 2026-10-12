@@ -1,5 +1,5 @@
 dungeon: main.o color.o terminal.o newSleep.o
-	gcc main.o color.o terminal.o -o dungeon
+	gcc main.o color.o terminal.o newSleep.o -o dungeon
 
 dungeon.o: main.c color.h terminal.h
 	gcc -Wall -ansi -pedantic -g main.c -c
