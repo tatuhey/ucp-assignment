@@ -1,4 +1,4 @@
-dungeon: main.o color.o terminal.o
+dungeon: main.o color.o terminal.o newSleep.o
 	gcc main.o color.o terminal.o -o dungeon
 
 dungeon.o: main.c color.h terminal.h
@@ -10,5 +10,8 @@ color.o: color.c color.h
 terminal.o: terminal.c terminal.h
 	gcc -Wall -ansi -pedantic -g terminal.c -c
 
+newSleep.o: newSleep.c newSleep.h
+	gcc -Wall -ansi -pedantic -g newSleep.c -c
+
 clean:
-	rm dungeon main.o color.o terminal.o
+	rm dungeon main.o color.o terminal.o newSleep.o

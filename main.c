@@ -2,10 +2,12 @@
 #include <stdlib.h>
 #include "color.h"
 #include "terminal.h"
+#include "newSleep.h"
 
 #define ARRWIDTH 100
 #define ARRHEIGHT 100
 
+void clearDisplay(int h, int w, int arr[ARRHEIGHT][ARRWIDTH]);
 void display(int hgt, int wdt, int mapArray[ARRHEIGHT][ARRWIDTH]);
 
 int main(int argc, char* argv[]) {
@@ -55,7 +57,7 @@ int main(int argc, char* argv[]) {
     }
 
     if(status == 1) {
-        display(height, width, mapArr);
+        clearDisplay(height, width, mapArr);
     }
 
 
@@ -78,7 +80,7 @@ int main(int argc, char* argv[]) {
             printf("Invalid entry\n");
         }
 
-        display(height, width, mapArr);
+        clearDisplay(height, width, mapArr);
     }
 
     
@@ -151,6 +153,12 @@ int main(int argc, char* argv[]) {
 
 
     return 0;
+}
+
+void clearDisplay(int h, int w, int arr[ARRHEIGHT][ARRWIDTH]){
+    system("tput cup 0 0");
+    display(h, w, arr);
+    newSleep(1.25);
 }
 
 void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
