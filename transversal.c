@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"transversal.h"
 
 void playerTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * playerH, int * playerW) {
     int kk;
