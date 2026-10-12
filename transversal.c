@@ -7,7 +7,7 @@ void playerTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * playerH
     int ll;
     int foundFlag = 0;
     for(kk = 0; kk < h; kk++) {
-        for(ll = 0; ll < w; ll++) {
+        for(ll = 0; ll < w; ll++) {     /*nested for loop to find player in array, if found change flag*/
             if(arr[kk][ll] == 4) {
                 * playerW = ll;
                 * playerH = kk;
@@ -23,7 +23,7 @@ void goalTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * gH, int *
     int ii;
     int jj;
     int foundFlag = 0;
-    for(ii = 0; ii < h; ii++) {
+    for(ii = 0; ii < h; ii++) {         /*same here*/
         for(jj = 0; jj < w; jj++) {
             if(arr[ii][jj] == 5) {
                 * gH = ii;

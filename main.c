@@ -11,14 +11,14 @@
 #define ARRWIDTH 100
 #define ARRHEIGHT 100
 
+typedef struct LinkedListNode {
+    void * data;
+    struct LinkedListNode * next;    
+} LinkedListNode; /*not enough time*/
 
-
-/*another one*/
 
 int main(int argc, char* argv[]) {
-    /*
-    2D ARRAY CREATION BELOW. NEED TO GRAB THE ARRAY SIZE FROM FILE READING
-    */
+
     /* not malloc method*/
     int mapArr[ARRHEIGHT][ARRWIDTH];
     int height, width, i, j;
@@ -30,11 +30,12 @@ int main(int argc, char* argv[]) {
     int prv = 0;
     int goalW = -1;
     int goalH = -1;
+
+    /* too many variables */
+
     /*
     FILE READING BELOW
     */
-
-    /*https://stackoverflow.com/questions/32998105/reading-a-2d-array-from-a-file-in-c*/
     FILE* f = fopen(argv[1], "r");
     if(f == NULL) {
         perror("Error while opening file.\n");
@@ -66,54 +67,56 @@ int main(int argc, char* argv[]) {
 
         fclose(f);
     }
+    
+    if(status == 1) { /*if file read is correct*/
+        goalTransversal(height, width, mapArr, &goalH, &goalW); /*find where is goal*/
 
-    if(status == 1) {
-        goalTransversal(height, width, mapArr, &goalH, &goalW);
+        system("clear"); /*clear screen to get ready to show screen*/
+        clearDisplay(height, width, mapArr); /*show game screen*/
 
-        system("clear");
-        clearDisplay(height, width, mapArr);
+        printf("Press w to move UP\nPress s to move DOWN\nPress a to move LEFT\nPress d to move RIGHT\nPress u to UNDO\nPress 0 to EXIT\n"); /*print menu first time*/
 
-        printf("Press w to move UP\nPress s to move DOWN\nPress a to move LEFT\nPress d to move RIGHT\nPress u to UNDO\nPress 0 to EXIT\n");
+        /*UNDO DOES NOT WORK*/
 
-        while(ch != '0'){
-            disableBuffer();
-            scanf(" %c", &ch);
+        while(ch != '0'){   /*while not selecting EXIT*/
+            disableBuffer(); /*from supplementary*/
+            scanf(" %c", &ch); /*receive input without enter*/
             enableBuffer();
 
-            if(ch != 'a' && ch != 'w' && ch != 's' && ch != 'd' && ch != 'u' && ch != '0'){
+            if(ch != 'a' && ch != 'w' && ch != 's' && ch != 'd' && ch != 'u' && ch != '0'){ /*if entries are besides the menu, invalid*/
                 printf("Invalid entry\n");
             } else {
-                playerTransversal(height, width, mapArr, &posH, &posW);
+                playerTransversal(height, width, mapArr, &posH, &posW); /*find where player is right now*/
 
                 if (ch == 'd')
-                    moveRight(height, width, mapArr, posH, posW, &prv);
+                    moveRight(height, width, mapArr, posH, posW, &prv); /*press d, move right*/
                 else if (ch == 'a')
-                    moveLeft(height, width, mapArr, posH, posW, &prv);
+                    moveLeft(height, width, mapArr, posH, posW, &prv); /*press a, move left*/
                 else if (ch == 'w')
-                    moveUp(height, width, mapArr, posH, posW, &prv);
+                    moveUp(height, width, mapArr, posH, posW, &prv); /*press w, move up*/
                 else if (ch == 's') 
-                    moveDown(height, width, mapArr, posH, posW, &prv);
+                    moveDown(height, width, mapArr, posH, posW, &prv); /*press s, move down*/
 
-                playerTransversal(height, width, mapArr, &posH, &posW);
+                playerTransversal(height, width, mapArr, &posH, &posW); /*refresh player location*/
 
-                if (checkFloor(height, width, mapArr, posH, posW) == 0)
+                if (checkFloor(height, width, mapArr, posH, posW) == 0) /*if floor does not exist, fall*/
                     fallAnimation(height, width, mapArr, posH, posW, &prv);
             }
 
-            if (prv == 5){
+            if (prv == 5){ /*if player is in goal, you win and exit*/
                 system("clear");
                 clearDisplay(height, width, mapArr);
                 printf("\n");
                 printf("You win!\n");
                 ch = '0';
-            } else if (prv == 3) {
+            } else if (prv == 3) { /* if in dangerzone, lost and exit */
                 system("clear");
                 clearDisplay(height, width, mapArr);
                 printf("\n");
                 printf("You lost!\n");
                 ch = '0';
             } else{
-                system("clear");
+                system("clear"); /*otherwise, clear and display screen again*/
                 clearDisplay(height, width, mapArr);
             }
 

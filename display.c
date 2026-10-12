@@ -7,13 +7,13 @@
 void clearDisplay(int h, int w, int arr[ARRHEIGHT][ARRWIDTH]){
     system("clear");
     display(h, w, arr);
-    newSleep(1.25);
+    newSleep(1.25); /*lifted from supplementary*/
 }
 
 void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
     int i, j, k, l;
 
-    for(k = 0; k < wdt + 2; k++){
+    for(k = 0; k < wdt + 2; k++){ /*top border*/
         setForeground("red");
         printf("*");
         setForeground("reset");
@@ -21,11 +21,11 @@ void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
     printf("\n");
 
     for(i = 0; i < hgt; i++) {
-        setForeground("red");
+        setForeground("red");   /*left border*/
         printf("*");
         setForeground("reset");
 
-        for(j = 0; j < wdt; j++) {
+        for(j = 0; j < wdt; j++) { /*nested loop to print array*/
 
             if(arr[i][j] == 0) {
                 printf(" ");
@@ -61,7 +61,7 @@ void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
             printf("%d", mapArr[i][j]);
             */
         }
-        setForeground("red");
+        setForeground("red");   /* right border, hence \n*/
         printf("*");
         setForeground("reset");
         printf("\n");
@@ -70,7 +70,7 @@ void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
     for(l = 0; l < wdt + 2; l++) {
         setForeground("red");
         printf("*");
-        setForeground("reset");
+        setForeground("reset"); /*bottom border*/
         
     }
 
