@@ -5,3 +5,4 @@ dungeon
 terminal.o
 dungeon
 newSleep.o
+display.o

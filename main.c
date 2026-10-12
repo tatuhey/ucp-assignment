@@ -6,6 +6,7 @@
 #include "display.h"
 #include "transversal.h"
 #include "move.h"
+#include "fall.h"
 
 #define ARRWIDTH 100
 #define ARRHEIGHT 100

@@ -1,5 +1,5 @@
-dungeon: main.o color.o terminal.o newSleep.o display.o transversal.o move.o
-	gcc main.o color.o terminal.o newSleep.o display.o transversal.o move.o -o dungeon
+dungeon: main.o color.o terminal.o newSleep.o display.o transversal.o move.o fall.o
+	gcc main.o color.o terminal.o newSleep.o display.o transversal.o move.o fall.o -o dungeon
 
 dungeon.o: main.c color.h terminal.h
 	gcc -Wall -ansi -pedantic -g main.c -c
@@ -22,5 +22,8 @@ transversal.o: transversal.c transversal.h
 move.o: move.c move.h
 	gcc -Wall -ansi -pedantic -g move.c -c
 
+fall.o: fall.c fall.h
+	gcc -Wall -ansi -pedantic -g fall.c -c
+
 clean:
-	rm dungeon main.o color.o terminal.o newSleep.o display.o transversal.o move.o
+	rm dungeon main.o color.o terminal.o newSleep.o display.o transversal.o move.o fall.o
