@@ -3,25 +3,16 @@
 #include "color.h"
 #include "terminal.h"
 #include "newSleep.h"
+#include "display.h"
+#include "transversal.h"
+#include "move.h"
 
 #define ARRWIDTH 100
 #define ARRHEIGHT 100
 
-/*gotta be its own file*/
-void clearDisplay(int h, int w, int arr[ARRHEIGHT][ARRWIDTH]);
-void display(int hgt, int wdt, int mapArray[ARRHEIGHT][ARRWIDTH]);
+
 
 /*another one*/
-void playerTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * playerH, int * playerW);
-void goalTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * gH, int * gW);
-
-void moveLeft(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv);
-void moveRight(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv);
-void moveUp(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv);
-void moveDown(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv);
-
-int checkFloor(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW);
-void fallAnimation(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv);
 
 int main(int argc, char* argv[]) {
     /*
@@ -131,180 +122,8 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-void clearDisplay(int h, int w, int arr[ARRHEIGHT][ARRWIDTH]){
-    system("clear");
-    display(h, w, arr);
-    newSleep(1.25);
-}
-
-void display(int hgt, int wdt, int arr[ARRHEIGHT][ARRWIDTH]) {
-    int i, j, k, l;
-    char t;
-
-    for(k = 0; k < wdt + 2; k++){
-        setForeground("red");
-        printf("*");
-        setForeground("reset");
-    }
-    printf("\n");
-
-    for(i = 0; i < hgt; i++) {
-        setForeground("red");
-        printf("*");
-        setForeground("reset");
-
-        for(j = 0; j < wdt; j++) {
-
-            if(arr[i][j] == 0) {
-                printf(" ");
-            }
-            else if (arr[i][j] == 1){
-                setBackground("white");
-                printf(" ");
-                setBackground("reset");
-            }
-            else if (arr[i][j] == 2) {
-                printf("H");
-            }
-            else if (arr[i][j] == 3) {
-                setBackground("red");
-                printf(" ");
-                setBackground("reset");
-            }
-            else if (arr[i][j] == 4) {
-                setBackground("blue");
-                printf("P");
-                setBackground("reset");
-            }
-            else if (arr[i][j] == 5)
-                printf("G");
-            else
-                printf("?");
-            /*
-            printf("%d", mapArr[i][j]);
-            */
-        }
-        setForeground("red");
-        printf("*");
-        setForeground("reset");
-        printf("\n");
-
-    }
-    for(l = 0; l < wdt + 2; l++) {
-        setForeground("red");
-        printf("*");
-        setForeground("reset");
-        
-    }
-
-    printf("\n");
-       
-}
 
 /*
 harus di edit utk retunring coordianates of players
 */
-void playerTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * playerH, int * playerW) {
-    int kk;
-    int ll;
-    int foundFlag = 0;
-    for(kk = 0; kk < h; kk++) {
-        for(ll = 0; ll < w; ll++) {
-            if(arr[kk][ll] == 4) {
-                * playerW = ll;
-                * playerH = kk;
-                foundFlag = 1;
-            }
-        }
-    }
-    if(foundFlag == 0)
-        printf("Player is not found\n");
-}
 
-void goalTransversal(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int * gH, int * gW) {
-    int ii;
-    int jj;
-    int foundFlag = 0;
-    for(ii = 0; ii < h; ii++) {
-        for(jj = 0; jj < w; jj++) {
-            if(arr[ii][jj] == 5) {
-                * gH = ii;
-                * gW = jj;
-                foundFlag = 1;
-            }
-        }
-    }
-    if(foundFlag == 0)
-        printf("Goal is not found\n");
-}
-
-void moveLeft(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv) {
-    if (pW - 1 >= 0 && (arr[pH][pW - 1] == 0 || arr[pH][pW - 1] == 2 || arr[pH][pW - 1] == 5)) {
-    
-        arr[pH][pW] = * prv;
-        *prv = arr[pH][pW - 1];
-        arr[pH][pW - 1] = 4;
-        
-    }
-}
-
-void moveRight(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv) {
-    if (pW + 1 < w && (arr[pH][pW + 1] == 0 || arr[pH][pW + 1] == 2 || arr[pH][pW + 1] == 5)) { /* 0 == empty, 2 == ladder, 5 == goal*/
-        arr[pH][pW] = * prv;
-        *prv = arr[pH][pW + 1];
-        arr[pH][pW + 1] = 4;
-        
-    }
-}
-
-void moveUp(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv) {
-    if (pH - 1 >= 0 && (arr[pH - 1][pW] == 2 || (*prv == 2 && arr[pH - 1][pW] != 1))) {
-        arr[pH][pW] = * prv;
-        *prv = arr[pH - 1][pW];
-        arr[pH - 1][pW] = 4;
-    }
-}
-
-void moveDown(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv) {
-    if (pH + 1 < h && (arr[pH + 1][pW] == 2 || (*prv == 2 && arr[pH + 1][pW] != 1))) {
-        arr[pH][pW] = * prv;
-        *prv = arr[pH + 1][pW];
-        arr[pH + 1][pW] = 4;
-    }
-}
-
-int checkFloor(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW) {
-    int flag = 0;
-
-    if (pH == h - 1){
-        flag = 1;
-    } else if (pH + 1 < h) {
-        if(arr[pH + 1][pW] == 1 || arr[pH + 1][pW] == 2) {
-            flag = 1;
-        } else
-            flag = 0;
-    }
-
-    return flag;
-}   
-
-void fallAnimation(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW, int * prv) {
-
-    while(checkFloor(h, w, arr, pH, pW) == 0 && pH + 1 < h){
-        arr[pH][pW] = *prv;
-        *prv = arr[pH + 1][pW];
-        arr[pH + 1][pW] = 4;
-
-
-        pH++;
-
-        system("tput cup 0 0");
-        display(h, w, arr);
-
-        
-
-        newSleep(0.2);
-    }
-   
-   
-}
