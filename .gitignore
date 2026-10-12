@@ -6,3 +6,6 @@ terminal.o
 dungeon
 newSleep.o
 display.o
+fall.o
+move.o
+transversal.o

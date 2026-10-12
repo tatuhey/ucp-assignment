@@ -1,6 +1,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include"fall.h"
+#include"newSleep.h"
+#include"display.h"
 
 int checkFloor(int h, int w, int arr[ARRHEIGHT][ARRWIDTH], int pH, int pW) {
     int flag = 0;
