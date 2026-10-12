@@ -121,9 +121,3 @@ int main(int argc, char* argv[]) {
  
     return 0;
 }
-
-
-/*
-harus di edit utk retunring coordianates of players
-*/
-
