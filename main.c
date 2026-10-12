@@ -58,6 +58,29 @@ int main(int argc, char* argv[]) {
         display(height, width, mapArr);
     }
 
+
+    /*
+    keyboard entry domne?
+    */
+    printf("Press w to move UP\nPress s to move DOWN\nPress a to move LEFT\nPress d to move RIGHT\nPress u to UNDO\nPress 0 to EXIT\n");
+    /*
+    Press 0 need to be keyed out later; just for testing
+    */
+
+    char ch;
+
+    while(ch != '0'){
+        disableBuffer();
+        scanf(" %c", &ch);
+        enableBuffer();
+
+        if(ch != 'a' && ch != 'w' && ch != 's' && ch != 'd'){
+            printf("Invalid entry\n");
+        }
+
+        display(height, width, mapArr);
+    }
+
     
     // int k, l;
     // char t;
